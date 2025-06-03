@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Malavika P | Portfolio</title>
+  <!-- Bootstrap CSS CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Font Awesome for Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <style>
+    /* Original CSS from the first file */
+    body {
+      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #343a40;
+      transition: background-color 0.3s, color 0.3s; /* Added for dark mode transition */
+      scroll-behavior: smooth; /* Added for smooth scrolling */
+    }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+    .section-title {
+      border-bottom: 3px solid #0d6efd;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+    .card {
+      box-shadow: 0 0 15px rgb(0 0 0 / 0.1);
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out; /* Added for hover effect */
+    }
+    .card:hover {
+      transform: translateY(-5px); /* Added for hover effect */
+    }
+    .footer {
+      background: #343a40;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      border-radius: 5px;
+    }
+    .btn-primary {
+      transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out; /* Added for hover effect */
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px); /* Added for hover effect */
+      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* Added for hover effect */
+    }
+
+    /* Dark mode styles (adapted to original theme) */
+    body.dark-mode {
+      background: #212529; /* Dark background */
+      color: #e2e6ea; /* Light text */
+    }
+    body.dark-mode .navbar {
+      background-color: #343a40 !important; /* Darker navbar */
+    }
+    body.dark-mode .navbar-brand,
+    body.dark-mode .nav-link {
+      color: #e2e6ea !important; /* Light text for navbar */
+    }
+    body.dark-mode .section-title {
+      border-bottom-color: #0d6efd; /* Keep primary blue */
+    }
+    body.dark-mode .card {
+      background-color: #2c3034; /* Darker card background */
+      color: #e2e6ea; /* Light text for cards */
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Lighter shadow for dark mode */
+    }
+    body.dark-mode .footer {
+      background: #1a1d20; /* Even darker footer */
+      color: #e2e6ea;
+    }
+    body.dark-mode .form-control {
+      background-color: #343a40;
+      color: #e2e6ea;
+      border-color: #495057;
+    }
+    body.dark-mode .form-control::placeholder {
+      color: #adb5bd;
+    }
+    body.dark-mode .form-label {
+      color: #e2e6ea;
+    }
+    body.dark-mode .btn-primary {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+    }
+    body.dark-mode .btn-primary:hover {
+      background-color: #0b5ed7;
+      border-color: #0b5ed7;
+    }
+
+    /* Navbar shrink on scroll (retained) */
+    .navbar-shrink {
+      padding-top: 0.5rem !important;
+      padding-bottom: 0.5rem !important;
+      transition: padding-top 0.3s, padding-bottom 0.3s;
+    }
+
+    /* Scroll reveal animation (retained) */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Project Modal Styling (adapted to original theme) */
+    .modal-content {
+        background-color: #f8f9fa; /* Light background for modal */
+        color: #343a40; /* Dark text for modal */
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+    body.dark-mode .modal-content {
+        background-color: #2c3034; /* Darker background for modal in dark mode */
+        color: #e2e6ea;
+    }
+    .modal-header {
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 1rem;
+    }
+    body.dark-mode .modal-header {
+        border-bottom-color: #495057;
+    }
+    .modal-header .btn-close {
+        filter: none; /* Reset filter for light mode */
+        color: #343a40;
+    }
+    body.dark-mode .modal-header .btn-close {
+        filter: invert(1); /* Make close button visible on dark background */
+        color: #e2e6ea;
+    }
+    .modal-title {
+        color: #0d6efd; /* Primary blue for title */
+        font-weight: 700;
+    }
+    .modal-body p {
+        color: #343a40;
+    }
+    body.dark-mode .modal-body p {
+        color: #e2e6ea;
+    }
+    .modal-category, .modal-dates {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+    body.dark-mode .modal-category, body.dark-mode .modal-dates {
+        color: #adb5bd;
+    }
+    .modal-body img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+    }
+    .modal-body ul {
+        list-style: disc;
+        list-style-position: inside;
+        padding-left: 0;
+        color: #343a40;
+    }
+    body.dark-mode .modal-body ul {
+        color: #e2e6ea;
+    }
+    .modal-body .btn-github {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background-color 0.3s ease;
+    }
+    .modal-body .btn-github:hover {
+        background-color: #0b5ed7;
+        border-color: #0b5ed7;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top py-3">
+    <div class="container">
+      <a class="navbar-brand" href="#">Malavika P</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user me-1"></i>About Me</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education"><i class="fas fa-graduation-cap me-1"></i>Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience"><i class="fas fa-briefcase me-1"></i>Work Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects"><i class="fas fa-lightbulb me-1"></i>Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills"><i class="fas fa-cogs me-1"></i>Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#certifications"><i class="fas fa-certificate me-1"></i>Certifications</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i>Contact</a></li>
+          <li class="nav-item">
+            <button id="darkModeToggle" class="btn btn-link nav-link">
+              <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about" class="container py-5 scroll-reveal">
+    <h2 class="section-title">About Me</h2>
+    <p>
+      Hello! I am <strong>Malavika P</strong>, currently pursuing M.Sc. Data Science at
+      SASTRA Deemed University. I am passionate about applying data science and
+      statistics to solve real-world problems, continuously learning and evolving
+      to contribute effectively in a dynamic environment.
+    </p>
+    <p>
+      <strong>Contact Info:</strong><br />
+      <i class="fas fa-phone-alt me-2"></i>Phone: 9698464289<br />
+      <i class="fas fa-envelope me-2"></i>Email: <a href="mailto:tharamalu0308@gmail.com">tharamalu0308@gmail.com</a><br />
+      <i class="fab fa-linkedin me-2"></i>LinkedIn: <a href="https://www.linkedin.com/in/malavika-shanmugam-4677662a0" target="_blank" rel="noopener noreferrer">linkedin.com/in/malavika-shanmugam-4677662a0</a>
+    </p>
+  </section>
+
+  <!-- Education Section -->
+  <section id="education" class="container py-5 scroll-reveal">
+    <h2 class="section-title">Education</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card p-4">
+          <h5><i class="fas fa-university me-2"></i>M.Sc. Data Science</h5>
+          <p class="mb-1"><em>SASTRA Deemed University</em></p>
+          <p class="mb-1">Duration: 2024 – 2026</p>
+          <p>CGPA: 8.64</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-4">
+          <h5><i class="fas fa-university me-2"></i>B.Sc. Statistics</h5>
+          <p class="mb-1"><em>St. Joseph's College</em></p>
+          <p class="mb-1">Duration: 2021 – 2024</p>
+          <p>CGPA: 8.4</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work Experience Section -->
+  <section id="experience" class="container py-5 scroll-reveal">
+    <h2 class="section-title">Work Experience</h2>
+    <div class="card p-4">
+      <h5><i class="fas fa-headset me-2"></i>Tele Caller Intern</h5>
+      <p><strong>India Post Payment Bank, Head Post Office</strong></p>
+      <p><em>Duration: 1 Month</em></p>
+      <ul>
+        <li>Handled outbound customer calls to promote banking services.</li>
+        <li>Assisted with customer queries and follow-ups.</li>
+        <li>Gained exposure to communication and service pitching in a formal environment.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="container py-5 scroll-reveal">
+    <h2 class="section-title">Projects</h2>
+    <div class="row g-4" id="project-cards-container">
+      <!-- Project cards will be dynamically inserted here -->
+    </div>
+  </section>
+
+  <!-- Project Detail Modal -->
+  <div class="modal fade" id="projectDetailModal" tabindex="-1" aria-labelledby="projectDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="projectDetailModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="modal-category"></p>
+          <p class="modal-dates"></p>
+          <img id="modal-project-image" src="" alt="Project Image" class="img-fluid">
+          <p id="modal-project-description"></p>
+          <ul id="modal-project-details"></ul>
+          <a id="modal-project-github" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+            <i class="fab fa-github me-2"></i> View on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills Section -->
+  <section id="skills" class="container py-5 scroll-reveal">
+    <h2 class="section-title">Skills</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <h6><i class="fas fa-code me-2"></i>Technical Skills</h6>
+        <ul>
+          <li>Oracle SQL</li>
+          <li>Python</li>
+          <li>R</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6><i class="fas fa-tools me-2"></i>Tools</h6>
+        <ul>
+          <li>MS Office (Word, Excel, PowerPoint)</li>
+          <li>SPSS</li>
+          <li>Tableau</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6><i class="fas fa-brain me-2"></i>Soft Skills</h6>
+        <ul>
+          <li>Creative Thinking</li>
+          <li>Analytical Thinking</li>
+          <li>Brainstorming</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="container py-5 scroll-reveal">
+    <h2 class="section-title">Certifications & Seminars</h2>
+    <ul>
+      <li><i class="fas fa-award me-2"></i>Certificate in Data Analytics in Python – 2021</li>
+      <li><i class="fas fa-award me-2"></i>Certificate in Literature of Artificial Intelligence – 2022</li>
+      <li><i class="fas fa-award me-2"></i>Certificate in Research through Statistical Package – 2023</li>
+      <li><i class="fas fa-chalkboard-teacher me-2"></i>Attended National Seminar on Data Mining Concepts and Techniques – 2022</li>
+      <li><i class="fas fa-chalkboard-teacher me-2"></i>Attended National Seminar on Statistical Applications in Recent Trends – 2024</li>
+    </ul>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container py-5 scroll-reveal">
+    <h2 class="section-title">Contact Me</h2>
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name *</label>
+        <input
+          type="text"
+          class="form-control rounded"
+          id="name"
+          placeholder="Your name"
+          required
+        />
+        <div class="invalid-feedback">Please enter your name.</div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email *</label>
+        <input
+          type="email"
+          class="form-control rounded"
+          id="email"
+          placeholder="Your email"
+          required
+        />
+        <div class="invalid-feedback">Please enter a valid email address.</div>
+      </div>
+      <div class="mb-3">
+        <label for="message" class="form-label">Message *</label>
+        <textarea
+          class="form-control rounded"
+          id="message"
+          rows="4"
+          placeholder="Your message"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please enter your message.</div>
+      </div>
+      <button type="submit" class="btn btn-primary rounded">Send</button>
+      <div id="formMessage" class="mt-3"></div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Malavika P. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS + Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Project Data (retained from previous version, adapted to original content)
+      const projects = [
+          {
+              id: 'life-satisfaction',
+              title: 'A Study of Life Satisfaction Among Housewives',
+              category: 'Survey Research, Data Visualization, Inferential Statistics',
+              dates: '2023',
+              description: 'A comprehensive study conducted in Tiruchirapalli District to understand the factors influencing life satisfaction among housewives, utilizing survey research methods and statistical analysis.',
+              details: [
+                  'Conducted extensive survey research to collect primary data from housewives in Tiruchirapalli District.',
+                  'Applied various data visualization techniques to present findings clearly and effectively.',
+                  'Utilized inferential statistics to draw conclusions and identify significant correlations.',
+                  'Gained insights into socio-economic factors and their impact on life satisfaction.'
+              ],
+              github: '#', // Placeholder, as no specific GitHub link was provided for this project
+              image: 'https://placehold.co/400x250/0d6efd/ffffff?text=Life+Satisfaction'
+          },
+          {
+              id: 'deepfake-voice',
+              title: 'Deepfake Voice Detection',
+              category: 'Deep Learning, Audio Processing',
+              dates: '2024',
+              description: 'Developed a deep learning model to accurately detect AI-generated audio (deepfake voices), contributing to the field of audio forensics and security.',
+              details: [
+                  'Implemented a deep learning architecture for classifying real vs. deepfake audio.',
+                  'Preprocessed audio data using techniques like MFCCs and spectrograms.',
+                  'Achieved high accuracy in identifying synthetic speech, demonstrating proficiency in neural networks and audio signal processing.'
+              ],
+              github: '#', // Placeholder
+              image: 'https://placehold.co/400x250/6f42c1/ffffff?text=Deepfake+Voice'
+          },
+          {
+              id: 'ckd-prediction',
+              title: 'Chronic Kidney Disease Prediction',
+              category: 'Machine Learning, Healthcare',
+              dates: '2024',
+              description: 'Built a robust machine learning model for the early diagnosis of Chronic Kidney Disease (CKD) using a dataset of clinical parameters.',
+              details: [
+                  'Performed data cleaning, feature engineering, and selection on clinical data.',
+                  'Trained and evaluated various machine learning algorithms (e.g., SVM, Random Forest, Logistic Regression).',
+                  'Developed a predictive tool that can assist in early intervention and improve patient outcomes.'
+              ],
+              github: '#', // Placeholder
+              image: 'https://placehold.co/400x250/20c997/ffffff?text=CKD+Prediction'
+          },
+          {
+              id: 'bitcoin-prediction',
+              title: 'Bitcoin Price Prediction',
+              category: 'Time Series Forecasting, Machine Learning',
+              dates: '2024',
+              description: 'Designed and implemented various time series forecasting models to predict Bitcoin prices, including LSTM, MLP, and Linear Regression.',
+              details: [
+                  'Collected and preprocessed historical Bitcoin price data.',
+                  'Explored different model architectures suitable for time series analysis.',
+                  'Evaluated model performance using metrics like RMSE and MAE.',
+                  'Demonstrated understanding of financial data analysis and predictive modeling.'
+              ],
+              github: '#', // Placeholder
+              image: 'https://placehold.co/400x250/fd7e14/ffffff?text=Bitcoin+Price'
+          }
+      ];
+
+      const projectCardsContainer = document.getElementById('project-cards-container');
+      const projectDetailModal = new bootstrap.Modal(document.getElementById('projectDetailModal'));
+      const modalTitle = document.getElementById('projectDetailModalLabel');
+      const modalCategory = document.querySelector('.modal-category');
+      const modalDates = document.querySelector('.modal-dates');
+      const modalImage = document.getElementById('modal-project-image');
+      const modalDescription = document.getElementById('modal-project-description');
+      const modalDetailsList = document.getElementById('modal-project-details');
+      const modalGithubLink = document.getElementById('modal-project-github');
+
+      // Function to render project cards
+      function renderProjectCards() {
+          projectCardsContainer.innerHTML = ''; // Clear existing cards
+          projects.forEach(project => {
+              const colDiv = document.createElement('div');
+              colDiv.className = 'col-md-6'; // Use col-md-6 for two columns as in the original layout
+              colDiv.innerHTML = `
+                  <div class="card p-4" data-project-id="${project.id}">
+                      <h5><i class="${getProjectIcon(project.id)} me-2"></i>${project.title}</h5>
+                      <p>${project.category}</p>
+                      <p class="card-text">${project.description}</p>
+                  </div>
+              `;
+              projectCardsContainer.appendChild(colDiv);
+
+              // Add click listener to the card
+              colDiv.querySelector('.card').addEventListener('click', () => openProjectModal(project.id));
+          });
+      }
+
+      // Helper function to get specific icons for projects (can be expanded)
+      function getProjectIcon(projectId) {
+          switch (projectId) {
+              case 'life-satisfaction': return 'fas fa-chart-bar';
+              case 'deepfake-voice': return 'fas fa-microphone-alt-slash';
+              case 'ckd-prediction': return 'fas fa-kidneys';
+              case 'bitcoin-prediction': return 'fab fa-bitcoin';
+              default: return 'fas fa-project-diagram'; // Default icon
+          }
+      }
+
+      // Function to open project modal
+      function openProjectModal(projectId) {
+          const project = projects.find(p => p.id === projectId);
+          if (project) {
+              modalTitle.textContent = project.title;
+              modalCategory.textContent = `Category: ${project.category}`;
+              modalDates.textContent = `Dates: ${project.dates || 'N/A'}`;
+              modalImage.src = project.image;
+              modalImage.alt = project.title;
+              modalDescription.textContent = project.description;
+
+              modalDetailsList.innerHTML = '';
+              project.details.forEach(detail => {
+                  const li = document.createElement('li');
+                  li.textContent = detail;
+                  modalDetailsList.appendChild(li);
+              });
+
+              modalGithubLink.href = project.github;
+              // Hide GitHub link if no valid URL
+              if (project.github && project.github !== '#') {
+                  modalGithubLink.style.display = 'inline-flex';
+              } else {
+                  modalGithubLink.style.display = 'none';
+              }
+
+              projectDetailModal.show();
+          }
+      }
+
+      renderProjectCards(); // Initial render of project cards
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a.nav-link').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Navbar shrink on scroll
+      const navbar = document.querySelector('.navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('navbar-shrink');
+        } else {
+          navbar.classList.remove('navbar-shrink');
+        }
+      });
+
+      // Dark mode toggle
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const body = document.body;
+      const moonIcon = darkModeToggle.querySelector('.fas');
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        moonIcon.classList.replace('fa-moon', 'fa-sun'); // Change icon to sun
+      }
+
+      darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+          localStorage.setItem('theme', 'dark');
+          moonIcon.classList.replace('fa-moon', 'fa-sun'); // Change icon to sun
+        } else {
+          localStorage.setItem('theme', 'light');
+          moonIcon.classList.replace('fa-sun', 'fa-moon'); // Change icon to moon
+        }
+      });
+
+      // Form validation and interaction
+      const form = document.getElementById('contactForm');
+      const formMessage = document.getElementById('formMessage');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          e.stopPropagation();
+          form.classList.add('was-validated');
+          return;
+        }
+
+        // Simulate form submission (replace with real submission if needed)
+        formMessage.textContent = 'Thank you for reaching out! I will get back to you soon.';
+        formMessage.classList.add('text-success');
+
+        // Reset form
+        form.reset();
+        form.classList.remove('was-validated');
+      });
+
+      // Scroll reveal animation
+      const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+
+      const revealOnScroll = () => {
+        scrollRevealElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) { // Adjust offset as needed
+            el.classList.add('visible');
+          }
+        });
+      };
+
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll(); // Initial check on load
+    });
+  </script>
+</body>
+</html>
